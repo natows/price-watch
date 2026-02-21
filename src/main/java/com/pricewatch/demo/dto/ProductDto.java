@@ -15,7 +15,6 @@ public class ProductDto {
     @NotBlank(message = "Przyporzadkuj produkt pod jakąś kategorię")
     private Category category;
 
-
     @NotBlank(message = "Chcesz dodać rzecz bez linka?")
     private String httpPath;
     

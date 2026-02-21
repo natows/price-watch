@@ -31,6 +31,13 @@ public class Product {
     private double currentPrice;
 
 
+    public Product(String productName, Category category, String httpPath) {
+        this.productName = productName;
+        this.category = category;
+        this.httpPath = httpPath;
+    }
+
+
     public Product(String productName, Category category, String httpPath, double originalPrice, double currentPrice) {
         this.productName = productName;
         this.category = category;
