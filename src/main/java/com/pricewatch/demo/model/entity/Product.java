@@ -46,6 +46,18 @@ public class Product {
         this.currentPrice = originalPrice; //to moze byc tricky zalezy jak dalej dziala apka
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        return id != null && id.equals(((Product) o).id);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
 
 

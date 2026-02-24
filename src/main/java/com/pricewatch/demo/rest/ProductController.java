@@ -14,15 +14,12 @@ public class ProductController {
 
     private final ProductService productService;
 
-    // @PostMapping("/add")
-    // public ProductDto addWatchedProduct(@RequestBody ProductDto product) {
-    //     return productService.addWatchedProduct(product);
+    @PostMapping("/add")
+    public ProductDto addWatchedProduct(@RequestBody ProductDto product) {
+        return productService.addWatchedProduct(product);
 
-    // }
-    @PostMapping("/proba")
-    public double getProductPrice(@RequestBody ProductDto product){
-        return productService.getProductPrice(product);
     }
+    
 
     
 }

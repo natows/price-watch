@@ -1,6 +1,6 @@
 package com.pricewatch.demo.model.entity;
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
 import lombok.*;
 
 
@@ -27,7 +27,7 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> watchedProducts;
+    private Set<Product> watchedProducts;
 
     public  User(String username, String encryptedPassword, String email) {
         this.username = username;
