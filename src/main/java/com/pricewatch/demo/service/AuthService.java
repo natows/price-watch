@@ -1,5 +1,6 @@
 package com.pricewatch.demo.service;
 
+import com.pricewatch.demo.exception.UserNotFoundException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -12,20 +13,28 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import com.pricewatch.demo.model.entity.*;
 
+import java.util.Optional;
+
 @Service 
 @RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
 
-    public User getCurrentUser(){
+    public Optional<User> getCurrentUserOptional(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || auth instanceof AnonymousAuthenticationToken){
-            return null;
+            return Optional.empty();
         }
-        return userRepository.findByUsername(auth.getName()).orElseThrow(() -> new RuntimeException("user not found"));
+        return userRepository.findByUsername(auth.getName());
+    }
+
+    public User getCurrentUserOrThrow(){
+        return getCurrentUserOptional().orElseThrow(UserNotFoundException::new);
     }
 
     public Long getCurrentUserId(){
-        return getCurrentUser().getId(); 
+        return getCurrentUserOrThrow().getId();
     }
+
+
 }

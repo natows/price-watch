@@ -31,13 +31,13 @@ public class UserServiceTest {
         User user = new User();
         user.setWatchedProducts(new HashSet<>());
 
-        when(authService.getCurrentUser()).thenReturn(user);
+        when(authService.getCurrentUserOrThrow()).thenReturn(user);
         when(userRepository.save(user)).thenReturn(user);
 
         User result = userService.addProductToUserWatchList(product);
 
         assertThat(result.getWatchedProducts()).contains(product);
-        verify(authService).getCurrentUser();
+        verify(authService).getCurrentUserOrThrow();
         verify(userRepository).save(user);
     }
     

@@ -19,7 +19,7 @@ public class UserService {
 
 
     public User addProductToUserWatchList(Product product){
-        User user = authService.getCurrentUser();
+        User user = authService.getCurrentUserOrThrow();
         user.getWatchedProducts().add(product);
         return userRepository.save(user);
     }

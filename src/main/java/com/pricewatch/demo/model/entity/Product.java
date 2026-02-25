@@ -43,7 +43,7 @@ public class Product {
         this.category = category;
         this.httpPath = httpPath;
         this.originalPrice = originalPrice;
-        this.currentPrice = originalPrice; //to moze byc tricky zalezy jak dalej dziala apka
+        this.currentPrice = currentPrice;
     }
 
     @Override
