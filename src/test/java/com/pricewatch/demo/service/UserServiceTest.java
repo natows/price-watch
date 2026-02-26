@@ -10,6 +10,8 @@ import com.pricewatch.demo.repository.UserRepository;
 
 import static org.mockito.Mockito.*;
 import com.pricewatch.demo.model.entity.*;
+import com.pricewatch.demo.dto.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashSet;
@@ -22,19 +24,24 @@ public class UserServiceTest {
     @Mock 
     private AuthService authService;
 
+    @Mock
+    ProductService productService;
+
     @InjectMocks
     private UserService userService;
 
     @Test 
-    void addProductToUserWatchList_ShouldAddProduct(){
+    void addProductToUserWatchList_ShouldAddProduct(){//do poprawki
+        ProductDto productDto = new ProductDto();
         Product product = new Product();
         User user = new User();
         user.setWatchedProducts(new HashSet<>());
 
         when(authService.getCurrentUserOrThrow()).thenReturn(user);
+        when(productService.getOrCreateProduct(productDto)).thenReturn(product);
         when(userRepository.save(user)).thenReturn(user);
 
-        User result = userService.addProductToUserWatchList(product);
+        User result = userService.addProductToUserWatchList(productDto);
 
         assertThat(result.getWatchedProducts()).contains(product);
         verify(authService).getCurrentUserOrThrow();

@@ -16,10 +16,15 @@ import com.pricewatch.demo.mapper.*;
 public class UserService {
     private final UserRepository userRepository;
     private final AuthService authService;
+    private final ProductService productService;
 
 
-    public User addProductToUserWatchList(Product product){
+    @Transactional
+    public User addProductToUserWatchList(ProductDto productDto){
         User user = authService.getCurrentUserOrThrow();
+
+        Product product = productService.getOrCreateProduct(productDto);
+
         user.getWatchedProducts().add(product);
         return userRepository.save(user);
     }
